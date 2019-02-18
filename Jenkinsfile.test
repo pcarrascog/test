@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    kubernetes {
-    label "maven-sdk-${UUID.randomUUID().toString()}"
-    yamlFile 'Jenkinsfile.kubernetes.dev.yaml'
-    }
+  agent any
   }
   environment {
     PROJECT_ID = 'bc-te-dlake-dev-s7b3' // Project:
