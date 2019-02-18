@@ -1,4 +1,3 @@
-@Library('jenkins-shared-library') _
 pipeline {
   agent {
     kubernetes {
@@ -12,6 +11,12 @@ pipeline {
     PATH_TO_DEPLOY = ''      // Ruta Local  : Donde se encuentran los Dags
   }
   stages{
+
+    stage('Checkout'){
+      steps{
+        git credentialsId: 'github', url: 'https://github.com/pcarrascog/test.git'
+      }
+    }
         
     stage('Environment Preparation'){
       steps {
