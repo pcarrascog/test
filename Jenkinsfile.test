@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  }
+  
   environment {
     PROJECT_ID = 'bc-te-dlake-dev-s7b3' // Project:
     BUCKET_NAME = 'us-east1-k8sorchestrator-203310f3-bucket/dags'          // Ruta Remota : Borra carpeta remota completa
