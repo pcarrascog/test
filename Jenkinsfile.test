@@ -11,6 +11,7 @@ pipeline {
     BUCKET_NAME = 'us-east1-k8sorchestrator-203310f3-bucket/dags'          // Ruta Remota : Borra carpeta remota completa
     PATH_TO_DEPLOY = ''      // Ruta Local  : Donde se encuentran los Dags
   }
+  stages{
         
     stage('Environment Preparation'){
       steps {
