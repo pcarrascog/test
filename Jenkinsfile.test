@@ -18,7 +18,7 @@ pipeline {
       steps {
           sh 'echo Environment Preparation'
           sh "find data-integrity-validation/src/main/java -name *.java > file.tmp"
-          sh "sed -i s/\\./data-integrity-validation\\/src//g file.tmp"
+          sh "sed -i s/\\./data-integrity-validation\\/src/ /g file.tmp"
           sh "more file.tmp"
 
 
