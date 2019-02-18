@@ -1,0 +1,45 @@
+@Library('jenkins-shared-library') _
+pipeline {
+  agent {
+    kubernetes {
+    label "maven-sdk-${UUID.randomUUID().toString()}"
+    yamlFile 'Jenkinsfile.kubernetes.dev.yaml'
+    }
+  }
+  environment {
+    PROJECT_ID = 'bc-te-dlake-dev-s7b3' // Project:
+    BUCKET_NAME = 'us-east1-k8sorchestrator-203310f3-bucket/dags'          // Ruta Remota : Borra carpeta remota completa
+    PATH_TO_DEPLOY = ''      // Ruta Local  : Donde se encuentran los Dags
+  }
+        
+    stage('Environment Preparation'){
+      steps {
+          sh 'echo Environment Preparation'
+          sh "find ./ -name *.java > file.tmp"
+          sh "echo BUILD_ID=${BUILD_ID} >> var.tmp" 
+          sh "echo GIT_COMMIT=${GIT_COMMIT} >> var.tmp"
+          sh '''for archivo in `cat file.tmp`; do
+                  BASE_DAG_TEMPLATE=`basename $archivo .prf`;
+
+                  K8S_TECHNOLOGY=`cat ${archivo} | egrep "^K8S_TECHNOLOGY" | cut -d'=' -f2;`
+                  BITBUCKET_PROYECTO=`cat ${archivo} | egrep "^BITBUCKET_PROYECTO" | cut -d\'=\' -f2;`
+                  BITBUCKET_NOMBRE_ARCHIVO=`cat ${archivo} | egrep "^BITBUCKET_NOMBRE_ARCHIVO" | cut -d\'=\' -f2;`
+                  
+                  DATE_DUILD=`date \'+%Y%m%d%H%M%S\'`
+                  #cat var.tmp | grep DATE_BUILD | cut -d\'=\' -f2`;
+                  DAG_TEMPLATE=${BASE_DAG_TEMPLATE}_${DATE_DUILD}.py;
+                  DAG_PRF=${BASE_DAG_TEMPLATE}.prf;
+
+                  cp template_dag.py ${DAG_TEMPLATE}
+                  cp $archivo $DAG_PRF
+                  
+                  sed -i s/_-_dag_nombre_-_/${BASE_DAG_TEMPLATE}_${DATE_DUILD}/g ${DAG_TEMPLATE}
+                  sed -i s/_-_k8s_technology_-_/${K8S_TECHNOLOGY}/g ${DAG_TEMPLATE}
+                  sed -i s/_-_bitbucket_proyecto_-_/${BITBUCKET_PROYECTO}/g ${DAG_TEMPLATE}
+                  sed -i s/_-_bitbucket_nombre_archivo_-_/${DAG_PRF}/g ${DAG_TEMPLATE}
+                  sed -i s/_-_fecha_ejecucion_-_/${DATE_DUILD}/g ${DAG_TEMPLATE}
+              done;'''
+      }
+    }    
+  }
+} 
