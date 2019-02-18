@@ -16,8 +16,9 @@ pipeline {
       steps {
           sh 'echo Environment Preparation'
           sh "find ./ -name *.java > file.tmp"
-          sh "echo BUILD_ID=${BUILD_ID} >> var.tmp" 
-          sh "echo GIT_COMMIT=${GIT_COMMIT} >> var.tmp"
+          sh "more file.tmp"
+
+          /*
           sh '''for archivo in `cat file.tmp`; do
                   BASE_DAG_TEMPLATE=`basename $archivo .prf`;
 
@@ -39,6 +40,7 @@ pipeline {
                   sed -i s/_-_bitbucket_nombre_archivo_-_/${DAG_PRF}/g ${DAG_TEMPLATE}
                   sed -i s/_-_fecha_ejecucion_-_/${DATE_DUILD}/g ${DAG_TEMPLATE}
               done;'''
+          */
       }
     }    
   }
