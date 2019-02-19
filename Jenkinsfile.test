@@ -20,7 +20,8 @@ pipeline {
           sh "find data-integrity-validation/src/main/java -name *.java > file.tmp"
 
           sh "sed -i s/.java/./g file.tmp | sed -i s~data-integrity-validation\\/src\\/main\\/java\\/~\\ ~ file.tmp"
-          sh "awk -F'.' '{ print \$1 , print \$2 }' file.tmp"
+          sh "awk -F'.' '{ print \$1 ,  \$2 }' file.tmp"
+
 
 
 /*  
