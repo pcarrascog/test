@@ -26,7 +26,7 @@ pipeline {
 
           sh '''for archivo in `cat file_02.tmp`; do
                   echo $archivo
-                  awk -F'|' {file=$1  template=$2}
+                  awk -F'|' {file=$1  template=$2} $archivo
                   echo $file -- $template
           
                 done;'''
