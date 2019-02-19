@@ -18,7 +18,7 @@ pipeline {
     stage('Environment Preparation'){
       steps {
           sh 'echo Environment Preparation'
-          sh "find ${project}/main/java -name *.java > file.tmp"
+          sh "find ./ -name *.java > file.tmp"
           sh '''for archivo in `cat file.tmp`; do
                   template=`basename $archivo | cut -d. -f1` ;
                   clasetmp=`dirname $archivo | cut -d/ -f5-7`; 
