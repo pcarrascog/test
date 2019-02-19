@@ -26,8 +26,12 @@ pipeline {
 
           sh '''for archivo in `cat file_02.tmp`; do
                   echo $archivo
-
+                  clase=`echo $archivo | cut -d\'|\' -f1`
+                  template=`echo $archivo | cut -d\'|\' -f2`
           
+                  echo $clase
+                  echo $template
+                  
                 done;'''
 
 
