@@ -24,12 +24,13 @@ pipeline {
           //sh "awk -F'/' '{ print \$1\".\"\$2\".\"\$3\".\"\$4\"|\"\$4}' file_01.tmp > file_02.tmp " 
             
           sh '''for archivo in `cat file.tmp`; do
-                  echo $archivo ;
-                  clase=`echo $archivo | cut -d\'|\' -f1` ;
-                  template=`echo $archivo | cut -d\'|\' -f2` ;
+                  echo `basename $archivo` ;
+
+                  #clase=`echo $archivo | cut -d\'|\' -f1` ;
+                  #template=`echo $archivo | cut -d\'|\' -f2` ;
           
-                  echo $clase ;
-                  echo $template ;
+                  #echo $clase ;
+                  #echo $template ;
                   
                 done;'''
 
