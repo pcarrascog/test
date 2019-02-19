@@ -21,7 +21,7 @@ pipeline {
 
           sh "sed -i s/.java/./g file.tmp | sed -i s~data-integrity-validation\\/src\\/main\\/java\\/~\\ ~ file.tmp"
           sh "awk -F'.' '{ print \$1 }' file.tmp > file_01.tmp"
-          sh "sed -i s~\\//.~\\ ~ file_01.tmp"
+          sh "sed -i '+/+.+g' file_01.tmp"
           sh "cat file_01.tmp"
 
 
