@@ -17,11 +17,14 @@ pipeline {
     stage('Environment Preparation'){
       steps {
           sh 'echo Environment Preparation'
-          sh "find data-integrity-validation/src/main/java -name *.java > file.tmp \
-           && sed -i s/.java/./g file.tmp | sed -i s~data-integrity-validation\\/src\\/main\\/java\\/~\\ ~ file.tmp \
-           && awk -F'.' '{ print \$1 }' file.tmp > file_01.tmp  
-           && awk -F'/' '{ print \$1\".\"\$2\".\"\$3\".\"\$4\"|\"\$4}' file_01.tmp > file_02.tmp \
-           && cat file_02.tmp"
+          sh "find data-integrity-validation/src/main/java -name *.java > file.tmp"
+
+          sh "sed -i s/.java/./g file.tmp | sed -i s~data-integrity-validation\\/src\\/main\\/java\\/~\\ ~ file.tmp"
+          sh "awk -F'.' '{ print \$1 }' file.tmp > file_01.tmp"
+          sh "awk -F'/' '{ print \$1\".\"\$2\".\"\$3\".\"\$4\"|\"\$4}' file_01.tmp > file_02.tmp"
+          sh "cat file_02.tmp"
+
+          /*
 
           sh '''for archivo in `cat file_02.tmp`; do
                   echo $archivo
@@ -30,10 +33,10 @@ pipeline {
           
                   echo $clase
                   echo $template
-
+                  
                 done;'''
 
-
+          */
 
           /*
           sh '''for archivo in `cat file.tmp`; do
