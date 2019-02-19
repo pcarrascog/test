@@ -34,7 +34,7 @@ pipeline {
                   
                 done;'''
 
-          }
+          
 
           /*
           sh '''for archivo in `cat file.tmp`; do
