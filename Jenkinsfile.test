@@ -33,8 +33,6 @@ pipeline {
                   
                 done;'''
 
-          
-*/
           /*
           sh '''for archivo in `cat file.tmp`; do
                   BASE_DAG_TEMPLATE=`basename $archivo .prf`;
