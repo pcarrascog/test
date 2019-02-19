@@ -24,6 +24,13 @@ pipeline {
           sh "awk -F'/' '{ print \$1\".\"\$2\".\"\$3\".\"\$4\"|\"\$4}' file_01.tmp > file.tmp"
           sh "cat file.tmp"
 
+          sh '''for archivo in `cat file.tmp`; do
+                
+                more $archivo
+                
+                
+                
+                done;'''
 
 
 /*  
