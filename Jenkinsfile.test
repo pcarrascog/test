@@ -26,7 +26,7 @@ pipeline {
           sh '''for archivo in `cat file.tmp`; do
                   template=`basename $archivo | cut -d. -f1` ;
                   clasetmp=`dirname $archivo | cut -d/ -f5-7`; 
-                  clase=`echo $clasetmp` | sed s/\//./g`
+                  clase=`echo $clasetmp` | sed s~\\//. ~`
                   echo $clase ;
                   #echo $template ;
                   
