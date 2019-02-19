@@ -26,7 +26,8 @@ pipeline {
 
           sh '''for archivo in `cat file_02.tmp`; do
                   echo $archivo
-                  awk -F'|' {file=$1  template=$2} $archivo
+                  file=`awk -F'|' {print $1} $archivo`
+                  temp=`awk -F'|' {print $2} $archivo`
                   echo $file -- $template
           
                 done;'''
@@ -48,12 +49,7 @@ pipeline {
 
                   cp template_dag.py ${DAG_TEMPLATE}
                   cp $archivo $DAG_PRF
-                  
-                  sed -i s/_-_dag_nombre_-_/${BASE_DAG_TEMPLATE}_${DATE_DUILD}/g ${DAG_TEMPLATE}
-                  sed -i s/_-_k8s_technology_-_/${K8S_TECHNOLOGY}/g ${DAG_TEMPLATE}
-                  sed -i s/_-_bitbucket_proyecto_-_/${BITBUCKET_PROYECTO}/g ${DAG_TEMPLATE}
-                  sed -i s/_-_bitbucket_nombre_archivo_-_/${DAG_PRF}/g ${DAG_TEMPLATE}
-                  sed -i s/_-_fecha_ejecucion_-_/${DATE_DUILD}/g ${DAG_TEMPLATE}
+
               done;'''
           */
 
