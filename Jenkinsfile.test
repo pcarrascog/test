@@ -21,8 +21,8 @@ pipeline {
 
           sh "sed -i s/.java/./g file.tmp | sed -i s~data-integrity-validation\\/src\\/main\\/java\\/~\\ ~ file.tmp"
           sh "awk -F'.' '{ print \$1 }' file.tmp > file_01.tmp"
-          sh "awk -F'/' '{ print \$1\".\"\$2\".\"\$3\".\"\$4}' file_01.tmp > file_02.tmp"
-          sh "cat file_02.tmp"
+          sh "awk -F'/' '{ print \$1\".\"\$2\".\"\$3\".\"\$4\"|\"\$4}' file_01.tmp > file.tmp"
+          sh "cat file.tmp"
 
 
 
