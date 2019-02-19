@@ -24,21 +24,14 @@ pipeline {
           sh "awk -F'/' '{ print \$1\".\"\$2\".\"\$3\".\"\$4\"|\"\$4}' file_01.tmp > file_02.tmp"
           sh "cat file_02.tmp"
 
+          sh '''for archivo in `cat file_02.tmp`; do
+                  echo $archivo
+
+          
+                done;'''
 
 
-/*  
-                    sh 'mvn -X compile exec:java \
-                        -Dexec.mainClass=com.latam.app.FieldSummationPipeline \
-                        -Dexec.args="--project=bc-te-dlake-dev-s7b3 \
-                        --region=us-east1 \
-                        --subnetwork=https://www.googleapis.com/compute/v1/projects/bc-te-dlake-dev-s7b3/regions/us-east1/subnetworks/net-us-east1 \
-                        --stagingLocation=gs://dataflow-staging-us-central1-1084410096275/temp/staging \
-                        --runner=DataflowRunner \
-                        --numWorkers=1 \
-                        --maxNumWorkers=5 \
-                        --tempLocation=gs://dataflow-staging-us-central1-1084410096275/temp \
-                        --templateLocation=gs://data-integrity-validation/templates/test_Field_Summation_Pipeline_Template "'
-*/
+
           /*
           sh '''for archivo in `cat file.tmp`; do
                   BASE_DAG_TEMPLATE=`basename $archivo .prf`;
@@ -62,6 +55,20 @@ pipeline {
                   sed -i s/_-_fecha_ejecucion_-_/${DATE_DUILD}/g ${DAG_TEMPLATE}
               done;'''
           */
+
+          /*  
+                    sh 'mvn -X compile exec:java \
+                        -Dexec.mainClass=com.latam.app.FieldSummationPipeline \
+                        -Dexec.args="--project=bc-te-dlake-dev-s7b3 \
+                        --region=us-east1 \
+                        --subnetwork=https://www.googleapis.com/compute/v1/projects/bc-te-dlake-dev-s7b3/regions/us-east1/subnetworks/net-us-east1 \
+                        --stagingLocation=gs://dataflow-staging-us-central1-1084410096275/temp/staging \
+                        --runner=DataflowRunner \
+                        --numWorkers=1 \
+                        --maxNumWorkers=5 \
+                        --tempLocation=gs://dataflow-staging-us-central1-1084410096275/temp \
+                        --templateLocation=gs://data-integrity-validation/templates/test_Field_Summation_Pipeline_Template "'
+*/
       }
     }    
   }
