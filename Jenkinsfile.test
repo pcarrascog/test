@@ -25,8 +25,8 @@ pipeline {
             
           sh '''for archivo in `cat file.tmp`; do
                   template=`basename $archivo | cut -d. -f1` ;
-                  clase=`dirname $archivo | cut -d/ -f5 -f6 -f7`; 
-          
+                  clase=`dirname $archivo | cut -d/ -f5-7`; 
+                  clase= ( $( echo $archivo | awk IFS=/ '{print "\"$4\" \"$5\" \"$6\""}' ) )
                   echo $clase ;
                   #echo $template ;
                   
